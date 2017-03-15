@@ -1,13 +1,37 @@
 <template>
   <div id="app">
-    <!-- <router-view></router-view> -->
-    adsfasdf
+    <Header1 />
+    <router-view></router-view>
+    ————————————————————————————
+    <div @click='changeComputed'>点我改变computed</div>
+    <div>{{appComputed}}</div>
   </div>
 </template>
 
 <script>
+import Header1 from './components/Header/Header'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Header1
+  },
+  data(){
+    return {
+      num:'1111111'
+    }
+  },
+  methods:{
+    changeComputed(){
+      this.num = 33333;
+    }
+  },
+  computed:{
+    appComputed(){
+      console.log(111)
+      return this.num+Date.now()
+    }
+  },
 }
 </script>
 
