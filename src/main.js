@@ -3,18 +3,15 @@ import App from './App'
 import router from './router'
 import store from './store'
 
-// Vue.config.productionTip = false
 
-
-let data = { a: 1 }
-
-
-
-// vm.data.a等同于vm.a
-let vm = new Vue({
+new Vue({
   el: '#app',
   router,
-  data: data,
+  data(){
+    return {
+      
+    }
+  },
   store,
   template: '<App/>',
   components: { App },
@@ -27,17 +24,5 @@ let vm = new Vue({
   	}
   },
   updated(){
-  	console.log(111)
   }
 })
-console.log(vm)
-
-
-// 修改vm.a后，将会出发watch事件
-vm.$watch('a', function (newVal, oldVal) {
-  console.log(newVal,oldVal)
-})
-
-
-data.a = 2;
-vm.a = 3;

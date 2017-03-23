@@ -13,24 +13,9 @@ export default {
 	name: 'header',
 	data () {
 		return {
-			msg: '这是头',
-			insertMsg:'插入不会改变的值',
-			title: '这是标题',
-			show: true,
-			disabled:true,
-			dynamicId:'id1',
-			todos: [
-				{ text: 'Learn JavaScript' },
-				{ text: 'Learn Vue' },
-				{ text: 'Build something awesome' }
-			],
-			inputword:'hahaha'
 		}
 	},
 	methods: {
-		clickMe: function() {
-				this.msg = 'hahahaha'
-		}
 	}
 }
 </script>

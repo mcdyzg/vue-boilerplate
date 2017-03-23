@@ -3,11 +3,7 @@ const state = {
 }
 
 const getters = {
-	get1: state => state.num+'hahaha',
-	total:(state,getters,rootState)=>{
-		console.log(getters,rootState)
-		return state.num+1000
-	}
+	get1: state => state.num+'part2'
 }
 
 const mutations = {
@@ -18,7 +14,6 @@ const mutations = {
 
 const actions = {
 	addSync({state,commit,rootState}){
-		console.log(rootState);
 		commit('add')
 	}
 }
