@@ -10,10 +10,11 @@
 	 		is='todoItem'
 	 		v-for='(todo,index) in todos'
 	 		:text='todo'
+	 		my-like='HAHAHA'
 	 		:index='index'
 	 		@remove='removeItem(index)'
 	 	>
-	 			
+	 		
 	 	</li>
 	 </ul>
 
@@ -404,21 +405,525 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+	<todo-item>
+		<div>我是分发的slot内容	</div>
+	 	<div>我是要分发的内容2</div>		
+	</todo-item>
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<todo-item>
+		<div slot='header'>
+			<div>我是头部</div>	
+			<div>我是头部2</div>
+		</div>
+	 	<div slot='footer'>
+	 		<div>我是尾部</div>
+	 		<div>我是尾部2</div>
+	 	</div>	
+	 	<slot >
+	 		<div>我是未分发的</div>
+	 		<div>我是未分发的</div>
+	 	</slot>		
+	</todo-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<todo-item>
+		
+		<template scope='props'>
+			<div>我是父元素的文字</div>
+			<div>哈哈{{props.value}}</div>
+		</template>
+	</todo-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 作用域槽相当于将template里的内容放到子组件的slot占位符里，只不过有时候父组件的template里需要子组件的变量，同时需要父组件的变量，这个时候需要通过scope属性将子组件的值传到父组件上。 -->
+	<todo-item>
+		<template slot='header' scope='props'>
+			<li>{{inputValue}}{{props.text}}</li>
+		</template>
+	</todo-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 我是使用component组件渲染的子组件 -->
+	<keep-alive>
+		<compoennt :is='currentView'></compoennt>
+	</keep-alive>
+	
+	<div @click='currentView = (currentView === "MyHeader" ? "todoItem":"MyHeader")'>点击我切换组件</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+	<!-- 用字符串模板的时候可以用驼峰是写法 -->
+	`<todoItem>哈哈哈哈哈</todoItem>`
+	<todo-item
+		@event-a='clickMe'
+		>
+		我是测试传递方法的
+	</todo-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<Block></Block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- this.$nextTick()方法接收一个函数作为参数，$nextTick的意义是在render完之后才会执行，相当于调用了componentDidUpdate方法。 -->
+	<div>{{toUpdate}}</div>
+	<div @click="updateQueue">点我更新异步队列 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div @click="show = !show">切换</div>
+	<transition name='slide-fade'>
+		<p v-if="show">hello</p>
+	</transition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<RenderBlock>我是slot内容
+		<Block></Block>
+	</RenderBlock>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<input v-focus name="">
 </div>
 	
 </template>
 
 <script>
+// console.log(this)
+// bus.$on('id-selected', function (id) {
+//   	console.log(id)
+// })
+import Vue from 'vue'
 import todoItem from '@/components/todoItem'
+import MyHeader from '@/components/Header/Header.vue'
+import Block from '@/components/Block/Block.vue'
+import RenderBlock from '@/components/RenderBlock/RenderBlock.vue'
+var a = 1;
+
+// Vue.directive('focus', {
+//   // 当绑定元素插入到 DOM 中。
+//   inserted: function (el) {
+//     // 聚焦元素
+//     el.focus()
+//   }
+// })
 
 export default {
 	name:'todo',
 	components:{
-		todoItem
+		todoItem,
+		MyHeader,
+		Block,
+		RenderBlock
+	},
+	// 自定义指令
+	directives: {
+	  	focus: {
+	    	inserted: function (el) {
+		    	// 聚焦元素
+		    	el.className = 'haha'
+		    	el.focus()
+		  	}
+	  	}
 	},
 	data(){
 		return {
-			todoItem:'',
+			todoItem:`sss${a}`,
 			todos:['第一','第二','第三'],
 			checkedNames:['Jack'],
 			selected:'',
@@ -428,7 +933,10 @@ export default {
 			toggle:'123',
 			selected2:'hahaha',
 			inputValue3:'input3',
-			inputValue4:'input4'
+			inputValue4:'input4',
+			currentView:'todoItem',   //这里也可以直接不加引号，相当于把todoItem组件赋给了这个变量
+			toUpdate:'我是等待被更新的变量',
+			show:true,
 		}
 	},
 	methods:{
@@ -445,12 +953,35 @@ export default {
 		},
 		clickMe(){
 			alert('点击了我')	
+		},
+		updateQueue(){
+			this.toUpdate = '我已经被更新了'
+			console.log(this.$el.textContent)
+			this.$nextTick(()=>{
+				console.log(this.$el.textContent)
+			})
 		}
 	}
 }
 </script>
-<style scoped>
+<style lang='sass' scoped>
+div{
+	color:#fff;
+	div{
+		color:red;
+	}
+}
 input[type='checkbox']{
 	-webkit-appearance: checkbox;
+}
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-active {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

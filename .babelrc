@@ -1,6 +1,13 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],
-    "stage-2"
+    ["es2016"],
+    "stage-3"
   ]
 }
+// 下面这种写法是给不需要async函数的用的
+// {
+//  "presets": [
+//    ["es2015", { "modules": false }],
+//    "stage-2"
+//  ]
+// }
