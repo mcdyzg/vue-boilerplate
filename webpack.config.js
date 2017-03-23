@@ -67,6 +67,7 @@ module.exports = {
         }
     },
     devServer: {
+        host:'0.0.0.0',
         port: 8082,                 //设置默认监听端口，如果省略，默认为8080
         historyApiFallback: true,   //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
         // hot: true,                  //是否热部署
