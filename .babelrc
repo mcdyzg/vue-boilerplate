@@ -1,7 +1,11 @@
 {
   "presets": [
-    ["es2016"],
-    "stage-3"
+    ["es2015", { "modules": false }],
+    "stage-0"
+  ],
+  // for async, generator
+  "plugins": [
+  	"transform-runtime"
   ]
 }
 // 下面这种写法是给不需要async函数的用的

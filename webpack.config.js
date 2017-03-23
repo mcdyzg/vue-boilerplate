@@ -3,7 +3,7 @@ var webpack = require('webpack')
 
 module.exports = {
     entry: {
-        // 如果babel是es2015和stage-2的话，那么需要用babel-polyfill来编译async函数，如果用的是es2016和stage-3(stage-3主要是一些对象扩展运算符用到,例如...),那么可以省略babel-polyfill
+        // 如果.babelrc里没有配置babel-plugin-transform-runtime(for async,generator)的话，这里需要用babel-polyfill,如果用到了，那么省略polyfill就好
         // app:['babel-polyfill','./src/main.js'],
         app:['./src/main.js'],
         common:['vue','vue-router']
