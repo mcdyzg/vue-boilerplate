@@ -1,5 +1,6 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -56,6 +57,10 @@ module.exports = {
                 }
                 ],
                 
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+                use: ['url-loader']
             }
         ]
     },
@@ -104,6 +109,11 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
-        })
+        }),
+        new HtmlWebpackPlugin({                         //生成模板文件
+            template: __dirname + "/index.tpl.html",
+            filename: 'index.html',
+            chunks: ['app', 'common'],
+        }),
     ])
 }
