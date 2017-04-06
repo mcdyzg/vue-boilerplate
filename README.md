@@ -1,57 +1,42 @@
 # vue-boilerplate
+vue的脚手架，vue + vue-router + vuex
 
-### 简介
+### Usage
 
-vue开发框架，使用webpack2打包，支持ES6语法，ES7 async函数。
+```
+1. npm install
+2. npm start
+3. open 0.0.0.0:8082
+```
+  
+### Features
+
+* vue
+* vue-router
+* vuex
+
+
 
 ### 目录结构
+```
+├── dist
+├── src
+│   ├── components    
+│   ├── router    
+│   ├── store
+│   ├── pages
+│   ├── App.vue
+│   ├── main.js
+├── test
+├── package.json
+└── README
+```
 
--dist 压缩后文件夹
+### Explation
 
-|
+1. 使用封装在一起的db模块，请求url都在同一个文件配置，省力。
+2. 起初使用fetch，后台发现请求不定时有问题，改用superagent，暂时没发现。
+3. 可以在webpack里定义多entry，打包的时候会打出多个包。
 
--src 源文件夹
-
-  |
-
-   -main.js 打包入口等全局设置
-
-  |
-
-   -App.vue 根组件
-
-  |
-
-   -router/index.js 路由配置
-
-  |
-
-   -page 页面文件夹
-
-  |
-
-   -components 组件文件夹
-
-  |
-
-   -modules 模块文件夹
-
-  |
-
-   -store 状态文件夹
-
-
-### Build Setup
-
-  ``` bash
-  # install dependencies
-  npm install
-
-  # serve with hot reload at 0.0.0.0:8082
-  npm start
-
-  # build for production with minification
-  npm run build
-  ```
 
 

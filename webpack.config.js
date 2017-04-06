@@ -6,7 +6,8 @@ module.exports = {
     entry: {
         // 如果.babelrc里没有配置babel-plugin-transform-runtime(for async,generator)的话，这里需要用babel-polyfill,如果用到了，那么省略polyfill就好
         // app:['babel-polyfill','./src/main.js'],
-        app:['./src/main.js'],
+        app:['./src/app/main.js'],
+        app2:['./src/app/main2.js'],
         common:['vue','vue-router']
     },
     
@@ -77,6 +78,7 @@ module.exports = {
         historyApiFallback: true,   //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
         // hot: true,                  //是否热部署
         quiet: false,               //让dev server处于静默的状态启动
+        contentBase:'./test',
         stats: {
             colors: true, // color is life
             chunks: false, // this reduces the amount of stuff I see in my terminal; configure to your needs
@@ -111,7 +113,7 @@ if (process.env.NODE_ENV === 'production') {
             minimize: true
         }),
         new HtmlWebpackPlugin({                         //生成模板文件
-            template: __dirname + "/index.tpl.html",
+            template: __dirname + "/test/index.tpl.html",
             filename: 'index.html',
             chunks: ['app', 'common'],
         }),
