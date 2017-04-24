@@ -1,6 +1,6 @@
 <template>
 	<div>
-		
+
 		<!-- <div>{{count222}}</div> -->
 		<!-- <div>{{map111}}</div> -->
 		<div>{{count}}</div>
@@ -11,6 +11,7 @@
 		<div @click="this.incrementAsync">点我也异步增加store</div>
 		<!-- 这样也可以 -->
 		<!-- <div @click="$store.commit('increment','haha')">点击我切换store</div> -->
+		我是count2
 		<div>{{count2}}</div>
 
 		<div>{{ map1 }}</div>
@@ -42,7 +43,6 @@
 		<br />
 		<br />
 		<br />
-		
 
 
 
@@ -59,7 +59,8 @@
 
 
 
-		
+
+
 		<div>{{ getter1 }}</div>
 
 
@@ -102,19 +103,26 @@
 
 
 
-		
+
 		<!-- 获取到cart这个module的getter的值 -->
 		<div>{{get1}}</div>
 		<div>{{this.get1}}</div>
 		<!-- 获取到cart这个module的state的值 -->
 		<div>{{this.$store.state.cart.num}}</div>
 		<div>{{cart}}</div>
-			
+
 		<!-- 调用cart这个modules的mutations -->
 		<div @click="add">cart中的add</div>
 
 		<!-- 调用cart这个modules的actions -->
 		<div @click="addSync">cart中的addSync</div>
+
+
+
+
+		<div class="">
+			{{hahaha}}
+		</div>
 	</div>
 </template>
 
@@ -124,7 +132,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
 	name:'TestVuex',
 	components:{
-		
+
 	},
 	// 一种写法
 	// computed:{
@@ -161,7 +169,7 @@ export default {
 			'map1',
 			'cart'
 		])
-		
+
 		// // 这样写就是给count一个别名 count222
 		// ...mapState({
 		// 	count222:'count',
@@ -174,7 +182,8 @@ export default {
 	// ]),
 	data(){
 		return {
-			vis:'222'
+			vis:'222',
+			hahaha:111111
 		}
 	},
 	methods:{

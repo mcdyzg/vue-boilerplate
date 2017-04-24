@@ -20,6 +20,7 @@ const mutations = {
 	increment(state,a){
 		console.log(a)
 		state.count++
+		state.hahaha++
 	},
 	decrement(state){
 		state.count--

@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -8,12 +10,12 @@ module.exports = {
         app:['./src/main.js'],
         common:['vue','vue-router']
     },
-    
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         // “path”仅仅告诉Webpack结果存储在哪里，然而“publicPath”项则被许多Webpack的插件用于在生产模式下更新内嵌到css、html文件里的url值。
         //引入的图片地址公共路径：本地环境为根目录‘/’，正式环境为cdn地址
-        publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+        publicPath: '/',
         filename: '[name].js'
     },
     module: {
@@ -55,7 +57,11 @@ module.exports = {
                     }
                 }
                 ],
-                
+
+            },
+            {
+                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+                use: ['url-loader']
             }
         ]
     },
@@ -67,12 +73,12 @@ module.exports = {
         }
     },
     devServer: {
-        contentBase:'./test',
         host:'0.0.0.0',
         port: 8082,                 //设置默认监听端口，如果省略，默认为8080
         historyApiFallback: true,   //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
         // hot: true,                  //是否热部署
         quiet: false,               //让dev server处于静默的状态启动
+        contentBase:'./test',
         stats: {
             colors: true, // color is life
             chunks: false, // this reduces the amount of stuff I see in my terminal; configure to your needs
@@ -82,13 +88,34 @@ module.exports = {
     performance: {
         hints: false
     },
-    devtool: '#eval-source-map',
+    // devtool: '',
     plugins:[
         new webpack.optimize.CommonsChunkPlugin({names: ['common'], minChunks: Infinity}),
         new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: '"development"'
+            },
             __LOCAL__: true,                                  // 本地环境
             __PRO__:   false
         }),
+        new CleanWebpackPlugin(['dist'], {
+            "root": __dirname,
+            verbose: true,
+            dry: false
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }),
+        new HtmlWebpackPlugin({                         //生成模板文件
+            template: __dirname + "/test/index.tpl.html",
+            filename: 'index.html',
+            chunks: ['app', 'common'],
+        }),
     ]
 }
-
