@@ -7,16 +7,15 @@ module.exports = {
     entry: {
         // 如果.babelrc里没有配置babel-plugin-transform-runtime(for async,generator)的话，这里需要用babel-polyfill,如果用到了，那么省略polyfill就好
         // app:['babel-polyfill','./src/main.js'],
-        app:['./src/app/main.js'],
-        app2:['./src/app/main2.js'],
+        app:['./src/main.js'],
         common:['vue','vue-router']
     },
-    
+
     output: {
         path: path.resolve(__dirname, 'dist'),
         // “path”仅仅告诉Webpack结果存储在哪里，然而“publicPath”项则被许多Webpack的插件用于在生产模式下更新内嵌到css、html文件里的url值。
         //引入的图片地址公共路径：本地环境为根目录‘/’，正式环境为cdn地址
-        publicPath: process.env.NODE_ENV === 'production' ? '/' : '/',
+        publicPath: '/',
         filename: '[name].js'
     },
     module: {
@@ -58,7 +57,7 @@ module.exports = {
                     }
                 }
                 ],
-                
+
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
@@ -89,12 +88,34 @@ module.exports = {
     performance: {
         hints: false
     },
-    devtool: '#eval-source-map',
+    // devtool: process.env.NODE_ENV === 'production' ? '' : '#eval-source-map',
     plugins:[
         new webpack.optimize.CommonsChunkPlugin({names: ['common'], minChunks: Infinity}),
+        new CleanWebpackPlugin(['dist'], {
+            "root": __dirname,
+            verbose: true,
+            dry: false
+        }),
         new webpack.DefinePlugin({
-            __LOCAL__: true,                                  // 本地环境
-            __PRO__:   false
+            'process.env': {
+                NODE_ENV: '"production"'
+            },
+            __LOCAL__: false,                                  // 本地环境
+            __PRO__:   true
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: false,
+            compress: {
+                warnings: false
+            }
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true
+        }),
+        new HtmlWebpackPlugin({                         //生成模板文件
+            template: __dirname + "/test/index.tpl.html",
+            filename: 'index.html',
+            chunks: ['app', 'common'],
         }),
     ]
 }
