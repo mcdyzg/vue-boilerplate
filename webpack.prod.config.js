@@ -7,7 +7,8 @@ module.exports = {
     entry: {
         // 如果.babelrc里没有配置babel-plugin-transform-runtime(for async,generator)的话，这里需要用babel-polyfill,如果用到了，那么省略polyfill就好
         // app:['babel-polyfill','./src/main.js'],
-        app:['./src/main.js'],
+        app:['./src/app/main.js'],
+        app2:['./src/app/main2.js'],
         common:['vue','vue-router']
     },
 
