@@ -83,19 +83,6 @@ module.exports = {
             '@': path.resolve(__dirname, 'src'),
         }
     },
-    devServer: {
-        host:'0.0.0.0',
-        port: 8082,                 //设置默认监听端口，如果省略，默认为8080
-        historyApiFallback: true,   //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-        // hot: true,                  //是否热部署
-        quiet: false,               //让dev server处于静默的状态启动
-        contentBase:'./test',
-        stats: {
-            colors: true, // color is life
-            chunks: false, // this reduces the amount of stuff I see in my terminal; configure to your needs
-            'errors-only': true
-        }
-    },
     performance: {
         hints: false
     },

@@ -42,3 +42,5 @@ vue的脚手架，vue + vue-router + vuex
 
 1.0.3 vue-loader升级到12.1.0之后lang=sass不在适用，改成lang=scss
 
+1.0.4 删除dev和prod的devserver设置
+
