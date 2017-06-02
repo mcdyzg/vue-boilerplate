@@ -9,6 +9,7 @@ module.exports = {
         // app:['babel-polyfill','./src/main.js'],
         app:['./src/app/main.js'],
         app2:['./src/app/main2.js'],
+        // 一个项目有多个入口时，尽量把vue和vue-router这种的包配置成externals，方便多个项目共用一套vue包；然后把一个项目多个入口页面中的公共包放到common里，比如说axios这样的包，方便多个入口页面使用缓存，节省空间。
         common:['vue','vue-router']
     },
     
@@ -76,6 +77,12 @@ module.exports = {
             }
         ]
     },
+    // 配置了externals的话，html里必须要配置包的cdn路径
+    // externals: {
+    //     // 设置后浏览器的vue-devtool不可用，因此开发时注释，上线时放开
+    //     'vue': 'Vue',
+    //     'vue-router':'VueRouter'
+    // },
     resolve: {
         extensions: ['.js', '.vue', '.json'],
         alias: {

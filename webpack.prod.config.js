@@ -9,6 +9,7 @@ module.exports = {
         // app:['babel-polyfill','./src/main.js'],
         app:['./src/app/main.js'],
         app2:['./src/app/main2.js'],
+        // 一个项目有多个入口时，尽量把vue和vue-router这种的包配置成externals，方便多个项目共用一套vue包；然后把一个项目多个入口页面中的公共包放到common里，比如说axios这样的包，方便多个入口页面使用缓存，节省空间。
         common:['vue','vue-router']
     },
 
@@ -86,7 +87,15 @@ module.exports = {
     performance: {
         hints: false
     },
-    // devtool: process.env.NODE_ENV === 'production' ? '' : '#eval-source-map',
+    // 配置了externals的话，html里必须要配置包的cdn路径
+    // externals: {
+    //     // 设置后浏览器的vue-devtool不可用，因此开发时注释，上线时放开
+    //     'vue': 'Vue',
+    //     'vue-router':'VueRouter'
+    // },
+    // http://www.css88.com/doc/webpack2/configuration/devtool/
+    // 线上想在浏览器里定位错误的话，打开配置
+    // devtool: '#source-map',
     plugins:[
         new webpack.optimize.CommonsChunkPlugin({names: ['common'], minChunks: Infinity}),
         new CleanWebpackPlugin(['dist'], {
@@ -102,8 +111,10 @@ module.exports = {
             __PRO__:   true
         }),
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: false,
+            sourceMap: true,
             compress: {
+                // 去掉console
+                drop_console:true,
                 warnings: false
             }
         }),

@@ -15,12 +15,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
+      name: 'todo',
+      component: todo
     },
     {
-    	path:'/todo',
-    	component:todo
+    	path:'/Hello',
+    	component:Hello
     },
     {
       path:'/vuex',

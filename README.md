@@ -44,3 +44,4 @@ vue的脚手架，vue + vue-router + vuex
 
 1.0.4 删除dev和prod的devserver设置
 
+1.1.0 增加按需加载和路由切换动效，未完成vuex的externals
