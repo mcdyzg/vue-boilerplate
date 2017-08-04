@@ -8,7 +8,7 @@ vue的脚手架，vue + vue-router + vuex
 2. npm start
 3. open 0.0.0.0:8082
 ```
-  
+
 ### Features
 
 * vue
@@ -45,3 +45,5 @@ vue的脚手架，vue + vue-router + vuex
 1.0.4 删除dev和prod的devserver设置
 
 1.1.0 增加按需加载和路由切换动效，未完成vuex的externals
+
+1.1.1 增加翻页左右滑动动效
