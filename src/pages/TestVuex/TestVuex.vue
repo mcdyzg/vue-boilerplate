@@ -1,5 +1,30 @@
 <template>
 	<div>
+		<div class="">
+			cart的num {{cart.num}}
+		</div>
+		<div class="">
+			total的num {{num}}
+		</div>
+		<button @click='add'>mutation: add</button>
+		<button @click='addSync'>action : addSync</button>
+
+
+		<br /><br /><br /><br /><br /><br /><br />
+		<div class="">
+			total的obj.name {{obj.name}}
+		</div>
+		<div class="">
+			total的obj.name {{obj.subObj.name}}
+		</div>
+
+		<br /><br /><br /><br /><br /><br /><br />
+
+
+		<div class="">
+			{{name}}{{cart.name}}{{getter1}}
+		</div>
+
 
 		<!-- <div>{{count222}}</div> -->
 		<!-- <div>{{map111}}</div> -->
@@ -108,7 +133,7 @@
 		<div>{{get1}}</div>
 		<div>{{this.get1}}</div>
 		<!-- 获取到cart这个module的state的值 -->
-		<div>{{this.$store.state.cart.num}}</div>
+		<div>cart的num:{{this.$store.state.cart.num}}</div>
 		<div>{{cart}}</div>
 
 		<!-- 调用cart这个modules的mutations -->
@@ -130,10 +155,8 @@
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
-	name:'TestVuex',
-	components:{
-
-	},
+	name: 'TestVuex',
+	components: {},
 	// 一种写法
 	// computed:{
 	// 	count(){
@@ -152,23 +175,16 @@ export default {
 	// ]),
 
 	// 第四种写法
-	computed:{
-		count2(){
-			return this.vis+'333'
+	computed: {
+		count2() {
+			return this.vis + '333'
 		},
 		// getter1(){
 		// 	return this.$store.getters.getter1
 		// },
-		...mapGetters([
-			'getter1',
-			'get1'
-			]),
+		...mapGetters(['getter1', 'get1']),
 		// 这样写也可以
-		...mapState([
-			'count',
-			'map1',
-			'cart'
-		])
+		...mapState(['count', 'map1', 'cart', 'name', 'num', 'obj']),
 
 		// // 这样写就是给count一个别名 count222
 		// ...mapState({
@@ -180,31 +196,33 @@ export default {
 	// computed: mapGetters([
 	// 	'haha'
 	// ]),
-	data(){
+	data() {
 		return {
-			vis:'222',
-			hahaha:111111
+			vis: '222',
+			hahaha: 111111,
 		}
 	},
-	methods:{
-		changeStore(){
+	methods: {
+		changeStore() {
 			console.log(this.$store)
-			this.$store.commit('increment','haha')
+			this.$store.commit('increment', 'haha')
 		},
 		// 调用mutation的方法，除了上面一种，还有这种
 		...mapMutations([
 			'decrement',
-			'add'
-			]),
+			'add',
+			// 如果这里指定了cart module下的add mutation，那么只有cart的namespaced为true才会执行cart的add ,如果没有指定，cart的add不会执行
+			'cart/add',
+		]),
 		...mapActions([
 			'incrementAsync',
 			'getUser',
 			'getUser2',
 			'getUser3',
 			'getUser4',
-			'addSync'
-			])
-	}
+			'addSync',
+		]),
+	},
 }
 </script>
 <style lang='sass' scoped>

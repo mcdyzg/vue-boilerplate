@@ -7,7 +7,15 @@ const state = {
 	count : 0,
 	map1:1,
 	map2:2,
-	map3:3
+	map3:3,
+	name:'测试重名的',
+	num:2,
+	obj:{
+		name:'aaaa',
+		subObj:{
+			name:'subobj'
+		}
+	}
 }
 
 const getters = {
@@ -17,6 +25,11 @@ const getters = {
 }
 
 const mutations = {
+	add(state,a){
+		state.num++
+		state.obj.name = 'bbbb'
+		state.obj.subObj.name = 'bbbb'
+	},
 	increment(state,a){
 		console.log(a)
 		state.count++
@@ -55,6 +68,10 @@ const actions = {
 	async getUser4({dispatch,commit}){
 		await dispatch('getUser3');
 		commit('increment', await $.ajax('//api.github.com/search/users?q=b'));
+	},
+	addSync({state,commit,rootState}){
+		console.log(rootState);
+		commit('add')
 	}
 }
 

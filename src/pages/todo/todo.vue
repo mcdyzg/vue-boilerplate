@@ -1,12 +1,12 @@
 <template>
 <div>
-	<input 
+	<input
 		v-model='todoItem'
 		@keyup.enter='addTodo'
-		placeholder="添加todo" 
+		placeholder="添加todo"
 	  />
 	 <ul>
-	 	<li 
+	 	<li
 	 		is='todoItem'
 	 		v-for='(todo,index) in todos'
 	 		:text='todo'
@@ -14,7 +14,7 @@
 	 		:index='index'
 	 		@remove='removeItem(index)'
 	 	>
-	 		
+
 	 	</li>
 	 </ul>
 
@@ -111,7 +111,7 @@
 	<br />
 	<br />
 	<br />
-	
+
 
 
 
@@ -279,8 +279,8 @@
 
 
 	<!-- toggle默认为123，当复选框选中时，toggle的值为a,没选中时，toggle的值为b -->
-	<input 
-		type="checkbox" 
+	<input
+		type="checkbox"
 		v-model='toggle'
 		:true-value='inputValue'
 		:false-value='inputValue2'
@@ -322,7 +322,7 @@
 	<select
 		v-model='selected2'
 		>
-		<option :value='{number:"123"}'>111</option>		
+		<option :value='{number:"123"}'>111</option>
 	</select>
 	{{selected2}}
 
@@ -358,7 +358,7 @@
 
 	<!-- 判断是input事件还是onchange事件，如果加了lazy，就变成了标准的onChange事件，只有在input获取或者失去焦点时才会改变值 -->
 	<input
-		v-model.lazy='inputValue3' 
+		v-model.lazy='inputValue3'
 		type="text" >
 	{{inputValue3}}
 
@@ -395,7 +395,7 @@
 
 
 	<input
-		v-model.number='inputValue4' 
+		v-model.number='inputValue4'
 		type='number'
 		>
 	{{inputValue4}}
@@ -435,7 +435,7 @@
 
 	<todo-item>
 		<div>我是分发的slot内容	</div>
-	 	<div>我是要分发的内容2</div>		
+	 	<div>我是要分发的内容2</div>
 	</todo-item>
 
 
@@ -470,17 +470,17 @@
 
 	<todo-item>
 		<div slot='header'>
-			<div>我是头部</div>	
+			<div>我是头部</div>
 			<div>我是头部2</div>
 		</div>
 	 	<div slot='footer'>
 	 		<div>我是尾部</div>
 	 		<div>我是尾部2</div>
-	 	</div>	
+	 	</div>
 	 	<slot >
 	 		<div>我是未分发的</div>
 	 		<div>我是未分发的</div>
-	 	</slot>		
+	 	</slot>
 	</todo-item>
 
 
@@ -517,7 +517,7 @@
 
 
 	<todo-item>
-		
+
 		<template scope='props'>
 			<div>我是父元素的文字</div>
 			<div>哈哈{{props.value}}</div>
@@ -610,7 +610,7 @@
 	<keep-alive>
 		<compoennt :is='currentView'></compoennt>
 	</keep-alive>
-	
+
 	<div @click='currentView = (currentView === "MyHeader" ? "todoItem":"MyHeader")'>点击我切换组件</div>
 
 
@@ -880,7 +880,7 @@
 
 	<input v-focus name="">
 </div>
-	
+
 </template>
 
 <script>
@@ -952,7 +952,7 @@ export default {
 			this.todos.splice(index,1)
 		},
 		clickMe(){
-			alert('点击了我')	
+			alert('点击了我')
 		},
 		updateQueue(){
 			this.toUpdate = '我已经被更新了'
@@ -964,7 +964,7 @@ export default {
 	}
 }
 </script>
-<style lang='sass' scoped>
+<style lang='scss' scoped>
 div{
 	color:#fff;
 	div{
